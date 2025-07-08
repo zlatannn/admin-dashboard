@@ -31,6 +31,99 @@ function handleLogin() {
   }
 }
 
+function handleLogout() {
+  sessionStorage.clear();
+  window.location.href = "login.html";
+}
+
+function toggleDarkMode() {
+  const body = document.body;
+  const btn = document.querySelector(".theme-toggle");
+  body.classList.toggle("dark-mode");
+
+  if (body.classList.contains("dark-mode")) {
+    btn.textContent = "🌙";
+    localStorage.setItem("theme", "dark");
+  } else {
+    btn.textContent = "☀";
+    localStorage.setItem("theme", "light");
+  }
+}
+
+function toggleDropdown(id) {
+  const dropdown = document.getElementById(id);
+  dropdown.classList.toggle("hidden");
+}
+
+function toggleAdminList() {
+  const role = sessionStorage.getItem("role");
+  const adminBtn = document.getElementById("specialFunctionBtn");
+  const content = document.getElementById("mainContent");
+
+  if (role === "superadmin") {
+    const list = users.filter(u => u.role !== "superadmin").map(u => `<li>${u.username} (${u.role})</li>`).join("");
+    content.innerHTML = `
+      <h3>Danh sách tài khoản</h3>
+      <ul>${list}</ul>
+      <div id="changePasswordSection">
+        <h4>Đổi mật khẩu người dùng</h4>
+        <label for="userSelect">Chọn người dùng:</label>
+        <select id="userSelect">
+          ${users.filter(u => u.role !== "superadmin").map(u => `<option value="${u.username}">${u.username}</option>`).join("")}
+        </select>
+        <label for="newPassword">Mật khẩu mới:</label>
+        <input type="password" id="newPassword" placeholder="Nhập mật khẩu mới">
+        <button onclick="changeUserPassword()">Cập nhật mật khẩu</button>
+      </div>
+    `;
+  }
+}
+
+function changeUserPassword() {
+  const username = document.getElementById("userSelect").value;
+  const newPassword = document.getElementById("newPassword").value;
+
+  if (!newPassword) {
+    alert("Vui lòng nhập mật khẩu mới.");
+    return;
+  }
+
+  const user = users.find(u => u.username === username);
+  if (user) {
+    user.password = newPassword;
+    alert(`Đã cập nhật mật khẩu cho ${username}`);
+    document.getElementById("newPassword").value = "";
+  }
+}
+
+function showPanel() {
+  document.getElementById("mainContent").innerHTML = `<h3>Bảng điều khiển</h3><p>Hiển thị thống kê tổng quan...</p>`;
+}
+
+function showDocuments(type) {
+  const label = type === "in" ? "Văn bản đến" : "Văn bản đi";
+  document.getElementById("mainContent").innerHTML = `<h3>${label}</h3><p>Nội dung ${label.toLowerCase()} sẽ hiển thị ở đây.</p>`;
+}
+
+function showTasks(type) {
+  const label = type === "pending" ? "Hồ sơ chờ" : "Hồ sơ hoàn tất";
+  document.getElementById("mainContent").innerHTML = `<h3>${label}</h3><p>Nội dung ${label.toLowerCase()} sẽ hiển thị ở đây.</p>`;
+}
+
+function showCalendar() {
+  document.getElementById("mainContent").innerHTML = `<h3>Lịch làm việc</h3><p>Lịch sẽ hiển thị tại đây.</p>`;
+}
+
+function showContacts() {
+  document.getElementById("mainContent").innerHTML = `<h3>Danh bạ điện tử</h3><p>Thông tin liên hệ sẽ hiển thị ở đây.</p>`;
+}
+
+function showPersonalInfo() {
+  const username = sessionStorage.getItem("username") || "";
+  const role = sessionStorage.getItem("role") || "";
+  document.getElementById("mainContent").innerHTML = `<h3>Thông tin cá nhân</h3><p>Tài khoản: <b>${username}</b><br>Quyền: <b>${role}</b></p>`;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const usernameInput = document.getElementById("username");
   const passwordInput = document.getElementById("password");
@@ -45,38 +138,24 @@ document.addEventListener("DOMContentLoaded", function () {
     if (savedUsername || savedPassword) rememberCheckbox.checked = true;
   }
 
-  // Dashboard logic
   const role = sessionStorage.getItem("role");
   const isLoggedIn = sessionStorage.getItem("isLoggedIn");
+  const username = sessionStorage.getItem("username");
+  const userDisplay = document.getElementById("currentUser");
+  const specialBtn = document.getElementById("specialFunctionBtn");
 
-  const superBtn = document.getElementById("specialFunctionBtn");
-  const adminList = document.getElementById("adminList");
-  const changePwdSection = document.getElementById("changePasswordSection");
-
-  if (!isLoggedIn && (superBtn || adminList)) {
-    window.location.href = "login.html";
-  }
-
-  if (superBtn) {
-    if (role === "superadmin") {
-      superBtn.disabled = false;
-      superBtn.classList.add("super-active");
-      superBtn.addEventListener("click", function () {
-        const isActive = adminList.classList.toggle("active");
-        if (isActive) {
-          renderAccounts();
-          populateUserSelect();
-          changePwdSection.classList.remove("hidden");
-        } else {
-          changePwdSection.classList.add("hidden");
-        }
-      });
-    } else {
-      superBtn.disabled = true;
+  if (!isLoggedIn) {
+    if (window.location.pathname.includes("dashboard.html")) {
+      window.location.href = "login.html";
     }
+    return;
   }
 
-  // Theme
+  if (userDisplay) userDisplay.textContent = username;
+  if (specialBtn && role === "superadmin") {
+    specialBtn.disabled = false;
+  }
+
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark") {
     document.body.classList.add("dark-mode");
@@ -84,57 +163,3 @@ document.addEventListener("DOMContentLoaded", function () {
     if (toggleBtn) toggleBtn.textContent = "🌙";
   }
 });
-
-function toggleDarkMode() {
-  const body = document.body;
-  body.classList.toggle("dark-mode");
-  const toggleBtn = document.querySelector(".theme-toggle");
-  if (body.classList.contains("dark-mode")) {
-    toggleBtn.textContent = "🌙";
-    localStorage.setItem("theme", "dark");
-  } else {
-    toggleBtn.textContent = "☀";
-    localStorage.setItem("theme", "light");
-  }
-}
-
-function handleLogout() {
-  sessionStorage.clear();
-  window.location.href = "login.html";
-}
-
-function renderAccounts() {
-  const accounts = users.filter(u => u.role !== "superadmin");
-  const list = document.getElementById("accountList");
-  list.innerHTML = "";
-  accounts.forEach(acc => {
-    const li = document.createElement("li");
-    li.textContent = `${acc.username} (${acc.role})`;
-    list.appendChild(li);
-  });
-}
-
-function populateUserSelect() {
-  const usernames = users.filter(u => u.role !== "superadmin").map(u => u.username);
-  const select = document.getElementById("userSelect");
-  select.innerHTML = "";
-  usernames.forEach(user => {
-    const option = document.createElement("option");
-    option.value = user;
-    option.textContent = user;
-    select.appendChild(option);
-  });
-}
-
-function changeUserPassword() {
-  const user = document.getElementById("userSelect").value;
-  const newPassword = document.getElementById("newPassword").value;
-
-  if (!newPassword) {
-    alert("Vui lòng nhập mật khẩu mới.");
-    return;
-  }
-
-  alert(`Mật khẩu của ${user} đã được cập nhật thành: ${newPassword}`);
-  document.getElementById("newPassword").value = "";
-}
