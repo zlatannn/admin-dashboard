@@ -46,8 +46,8 @@ body {
   max-width: 20%;
   border-right: 1px solid #ccc;
   padding-right: 1rem;
-  background-color: #000;
-  color: #fff;
+  background-color: transparent;
+  color: inherit;
 }
 
 .dashboard-right {
