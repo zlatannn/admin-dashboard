@@ -1,9 +1,4 @@
-const users = [
-  { username: "super", password: "123", role: "superadmin" },
-  { username: "admin1", password: "123", role: "admin" },
-  { username: "admin2", password: "123", role: "admin" },
-  { username: "viewer", password: "123", role: "viewer" }
-];
+// script.js
 
 document.addEventListener("DOMContentLoaded", () => {
   const usernameInput = document.getElementById("username");
@@ -11,7 +6,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const rememberCheckbox = document.getElementById("rememberMe");
   const captchaCodeEl = document.getElementById("captchaCode");
   const captchaInput = document.getElementById("captchaInput");
-  const refreshCaptchaBtn = document.getElementById("refreshCaptcha");
+  const refreshBtn = document.getElementById("refreshCaptcha");
+  const loginForm = document.getElementById("loginForm");
+
+  function generateCaptcha() {
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
+    captchaCodeEl.textContent = code;
+    sessionStorage.setItem("captcha", code);
+  }
 
   const savedUsername = localStorage.getItem("rememberedUsername");
   const savedPassword = localStorage.getItem("rememberedPassword");
@@ -20,17 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (savedPassword) passwordInput.value = savedPassword;
   if (savedUsername || savedPassword) rememberCheckbox.checked = true;
 
-  function generateCaptcha() {
-    const code = Math.floor(100000 + Math.random() * 900000).toString();
-    captchaCodeEl.textContent = code;
-    sessionStorage.setItem("captcha", code);
-  }
-
   generateCaptcha();
 
-  refreshCaptchaBtn.addEventListener("click", generateCaptcha);
+  refreshBtn.addEventListener("click", generateCaptcha);
 
-  document.getElementById("loginForm").addEventListener("submit", (e) => {
+  loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const username = usernameInput.value.trim();
@@ -42,11 +38,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (enteredCaptcha !== savedCaptcha) {
       alert("Mã xác nhận không đúng!");
       generateCaptcha();
-      captchaInput.value = "";
       return;
     }
 
-    if (username === "admin" && password === "123") {
+    const users = [
+      { username: "super", password: "123", role: "superadmin" },
+      { username: "admin1", password: "123", role: "admin" },
+      { username: "admin2", password: "123", role: "admin" },
+      { username: "viewer", password: "123", role: "viewer" }
+    ];
+
+    const user = users.find(u => u.username === username && u.password === password);
+
+    if (user) {
       if (remember) {
         localStorage.setItem("rememberedUsername", username);
         localStorage.setItem("rememberedPassword", password);
@@ -56,9 +60,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       sessionStorage.setItem("isLoggedIn", "true");
+      sessionStorage.setItem("role", user.role);
+      sessionStorage.setItem("username", user.username);
+
       window.location.href = "dashboard.html";
     } else {
       alert("Sai tên đăng nhập hoặc mật khẩu!");
+      generateCaptcha(); // 🔄 Tự động làm mới captcha nếu đăng nhập sai
     }
   });
 });
+
+
