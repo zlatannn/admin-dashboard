@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Đăng nhập</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="login-container">
+    <h2>Đăng nhập hệ thống</h2>
+    <form onsubmit="handleLogin(); return false;">
+        <input type="text" id="username" placeholder="Tên đăng nhập" required />
+        <input type="password" id="password" placeholder="Mật khẩu" required />
+        <div class="remember-wrapper">
+          <label for="rememberMe">
+            <input type="checkbox" id="rememberMe" />
+            Ghi nhớ đăng nhập
+          </label>
+        </div>  
+        <button type="submit">Đăng nhập</button>
+    </form>
+  </div>
+  <script src="script.js"></script>
+  <div class="footer">© 2025 - Ver 1.0 - Build 1 - 07/7/2025 16h30</div>
+</body>
+</html>
