@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <button class="theme-toggle" onclick="toggleDarkMode()">☀</button>
+  <div class="dashboard-container">
+    <div class="dashboard-left">
+      <h2>Chào mừng đến hệ thống</h2>
+      <div class="user-dropdown">
+        <button onclick="toggleDropdown('userMenu')">
+          <span id="currentUser">Tài khoản</span> ▼
+        </button>
+        <div id="userMenu" class="dropdown hidden">
+          <button onclick="showPersonalInfo()">Thông tin cá nhân</button>
+          <button id="specialFunctionBtn" onclick="toggleAdminList()">Chức năng đặc biệt</button>
+          <button onclick="handleLogout()">Đăng xuất</button>
+        </div>
+      </div>
+      <button onclick="showPanel()">Bảng điều khiển</button>
+
+      <div class="user-dropdown">
+        <button onclick="toggleDropdown('docMenu')">Văn bản điều hành ▼</button>
+        <div id="docMenu" class="dropdown hidden">
+          <button onclick="showDocuments('in')">Văn bản đến</button>
+          <button onclick="showDocuments('out')">Văn bản đi</button>
+        </div>
+      </div>
+
+      <div class="user-dropdown">
+        <button onclick="toggleDropdown('taskMenu')">Hồ sơ công việc ▼</button>
+        <div id="taskMenu" class="dropdown hidden">
+          <button onclick="showTasks('pending')">Hồ sơ chờ</button>
+          <button onclick="showTasks('done')">Hồ sơ hoàn tất</button>
+        </div>
+      </div>
+
+      <button onclick="showCalendar()">Lịch</button>
+      <button onclick="showContacts()">Danh bạ điện tử</button>
+    </div>
+
+    <div class="dashboard-right" id="mainContent">
+      <!-- Nội dung hiển thị ở đây -->
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <div class="footer">© 2025 - Ver 1.0 - Build 1 - 07/7/2025 16h30</div>
+</body>
+</html>
