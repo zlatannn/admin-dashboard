@@ -35,26 +35,6 @@ body {
   color: var(--text-dark);
 }
 
-.dashboard-container {
-  display: flex;
-  padding: 2rem;
-  gap: 2rem;
-}
-
-.dashboard-left {
-  flex: 1;
-  max-width: 20%;
-  border-right: 1px solid #ccc;
-  padding-right: 1rem;
-  background-color: transparent;
-  color: inherit;
-}
-
-.dashboard-right {
-  flex: 3;
-  max-width: 80%;
-}
-
 input,
 button,
 select {
@@ -68,15 +48,15 @@ select {
 }
 
 button {
-  background-color: transparent;
-  color: inherit;
-  border: 1px solid #ccc;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
 button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #43a047;
 }
 
 .theme-toggle {
@@ -107,28 +87,8 @@ button:hover {
   display: none;
 }
 
-.toggle-section {
-  display: none;
-  margin-top: 1rem;
-}
-
-.toggle-section.active {
-  display: block;
-}
-
 h2, h3, h4 {
   margin-top: 0;
-}
-
-ul {
-  list-style-type: none;
-  padding-left: 0;
-  margin-top: 1rem;
-}
-
-li {
-  padding: 0.5rem;
-  border-bottom: 1px solid #e0e0e0;
 }
 
 .remember-label {
@@ -146,10 +106,6 @@ label {
   font-weight: 500;
 }
 
-#changePasswordSection button {
-  margin-top: 1rem;
-}
-
 .footer {
   position: absolute;
   bottom: 0;
@@ -162,9 +118,8 @@ label {
 }
 
 @media screen and (max-width: 480px) {
-  .login-container,
-  .dashboard-container {
+  .login-container {
     margin: 40px 1rem;
-    flex-direction: column;
   }
 }
+
