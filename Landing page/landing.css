@@ -1,0 +1,107 @@
+/* Reset & base */
+body {
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Header */
+.navbar {
+  background-color: #ffffff !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand strong {
+  color: #007bff;
+  font-weight: 700;
+}
+
+/* Banner */
+.bg-banner {
+  height: 350px;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+.bg-banner::before {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  inset: 0;
+}
+
+.bg-banner .container {
+  position: relative;
+  z-index: 1;
+}
+
+.bg-banner h1,
+.bg-banner p {
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Nút chức năng */
+.btn-lg {
+  padding: 14px 20px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.btn-lg:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+.btn-success {
+  background-color: #198754;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #157347;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  border: none;
+  color: #212529;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* Footer */
+footer {
+  background-color: #ffffff;
+  border-top: 1px solid #dee2e6;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .bg-banner h1 {
+    font-size: 1.8rem;
+  }
+
+  .bg-banner p {
+    font-size: 1rem;
+  }
+}
