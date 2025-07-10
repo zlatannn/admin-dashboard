@@ -105,3 +105,30 @@ footer {
     font-size: 1rem;
   }
 }
+
+/* Bootstrap Icons CDN (thêm vào <head>) */
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css');
+
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+body.dark-mode .navbar {
+  background-color: #2c2c2c !important;
+}
+
+body.dark-mode .btn {
+  color: white;
+}
+
+body.dark-mode .bg-banner::before {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+body.dark-mode footer {
+  background-color: #2c2c2c;
+  color: #ccc;
+  border-top: 1px solid #444;
+}
