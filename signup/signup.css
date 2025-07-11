@@ -1,0 +1,22 @@
+body {
+  background: linear-gradient(to right, #e0f7fa, #f1f8e9);
+}
+
+.card {
+  border: none;
+  border-radius: 1rem;
+  background-color: #ffffff;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+button.btn {
+  transition: background-color 0.3s ease;
+}
+
+button.btn:hover {
+  background-color: #0056b3;
+}
