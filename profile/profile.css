@@ -1,0 +1,13 @@
+body {
+  background: #f8f9fa;
+}
+
+.profile-card {
+  max-width: 500px;
+  margin: 50px auto;
+}
+
+.profile-icon {
+  font-size: 3rem;
+  color: #0d6efd;
+}

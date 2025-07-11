@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+//login//
 document.addEventListener("DOMContentLoaded", () => {
   const authContainer = document.getElementById("auth-container");
   const loggedUser = localStorage.getItem("loggedInUser");
@@ -36,10 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
           Xin chào, ${loggedUser}
         </a>
         <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="../profile/profile.html">Thông tin cá nhân</a></li>
           <li><a class="dropdown-item" href="#" id="logout-btn">Đăng xuất</a></li>
         </ul>
       </div>
-        `;
+    `;
 
     // Thêm sự kiện logout
     const logoutBtn = document.getElementById("logout-btn");
@@ -51,11 +53,10 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   }
+
+  //sign up//
+  const signupBtn = document.getElementById("signup-button");
+  if (loggedUser && signupBtn) {
+    signupBtn.style.display = "none";
+  }
 });
-
-//sign up//
-const signupBtn = document.getElementById("signup-button");
-
-if (loggedUser && signupBtn) {
-  signupBtn.style.display = "none";
-}
