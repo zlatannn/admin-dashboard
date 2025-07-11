@@ -7,9 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const user = document.getElementById("username").value.trim();
     const pass = document.getElementById("password").value.trim();
 
+    // Giả lập xác thực
     if (user === "admin" && pass === "123456") {
-      alert("Đăng nhập thành công!");
-      window.location.href = "../landing.html"; // chuyển về trang chính
+      localStorage.setItem("loggedInUser", user);  // ✅ Lưu vào localStorage
+      window.location.href = "../landing_page/landing.html";
     } else {
       alert("Sai tên đăng nhập hoặc mật khẩu!");
     }
