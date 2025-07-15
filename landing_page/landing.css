@@ -22,17 +22,21 @@ a {
 
 /* Banner */
 .bg-banner {
-  height: 100px;
-  background-position: center;
+  height: 380px; /* cập nhật lại chiều cao chuẩn hơn */
+  background-color: #f8f9fa; /* màu nền trùng màu nền chung */
+  background-image: url('https://images.unsplash.com/photo-1581093458791-b1310f8a2d05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
   background-size: cover;
+  background-position: center;
+  background-blend-mode: lighten;
   position: relative;
 }
 
 .bg-banner::before {
   content: "";
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.0); /* bỏ lớp overlay tối */
   position: absolute;
   inset: 0;
+  z-index: 0;
 }
 
 .bg-banner .container {
@@ -40,10 +44,20 @@ a {
   z-index: 1;
 }
 
-.bg-banner h1,
-.bg-banner p {
-  color: white;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+.bg-banner h1 {
+  display: none; /* Ẩn hoàn toàn chữ banner */
+}
+
+.bg-banner a.btn {
+  font-weight: 500;
+  border-radius: 0.5rem;
+  opacity: 0.95;
+}
+
+.bg-banner a.btn:hover {
+  opacity: 1;
+  transform: scale(1.02);
+  transition: all 0.2s ease;
 }
 
 /* Nút chức năng */
@@ -97,12 +111,9 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .bg-banner h1 {
-    font-size: 1rem;
-  }
-
+  .bg-banner h1,
   .bg-banner p {
-    font-size: 1rem;
+    display: none;
   }
 }
 

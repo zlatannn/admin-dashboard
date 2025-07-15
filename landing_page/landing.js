@@ -60,3 +60,51 @@ document.addEventListener("DOMContentLoaded", () => {
     signupBtn.style.display = "none";
   }
 });
+
+//nop ho so//
+document.addEventListener("DOMContentLoaded", () => {
+  const applyBtn = document.getElementById("apply-btn");
+
+  if (applyBtn) {
+    applyBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const loggedInUser = localStorage.getItem("loggedInUser");
+
+      if (!loggedInUser) {
+        alert("Bạn cần đăng nhập để thực hiện chức năng này");
+      } else {
+        window.location.href = "../apply/apply.html";
+      }
+    });
+  }
+});
+
+//tra cuu ho so//
+document.addEventListener("DOMContentLoaded", () => {
+  const applyBtn = document.getElementById("lookup-btn");
+
+  if (applyBtn) {
+    applyBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const loggedInUser = localStorage.getItem("loggedInUser");
+
+      if (!loggedInUser) {
+        alert("Bạn cần đăng nhập để thực hiện chức năng này");
+      } else {
+        window.location.href = "../lookup/lookup.html";
+      }
+    });
+  }
+});
+
+//lien he ho tro//
+document.addEventListener("DOMContentLoaded", () => {
+  const supportBtn = document.getElementById("contact-btn");
+
+  if (supportBtn) {
+    supportBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      alert("Liên hệ A, SĐT: 0123 456 789 để được hỗ trợ.");
+    });
+  }
+});
