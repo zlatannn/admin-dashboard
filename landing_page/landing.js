@@ -108,3 +108,81 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+//goi y tim kiem//
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("search-input");
+  const suggestionsBox = document.getElementById("suggestions");
+  const clearBtn = document.getElementById("clear-search");
+
+  const services = [
+    "Cấp giấy khai sinh",
+    "Gia hạn hộ chiếu",
+    "Cấp giấy đăng ký kinh doanh",
+    "Đăng ký thường trú",
+    "Cấp giấy phép xây dựng",
+    "Nộp thuế điện tử",
+    "Tra cứu hồ sơ",
+    "Xin cấp chứng chỉ hành nghề",
+    "Cấp thẻ BHYT",
+    "Tạm trú tạm vắng"
+  ];
+
+  function showSuggestions(query = "") {
+  suggestionsBox.innerHTML = "";
+  const matched = services.filter(item =>
+    item.toLowerCase().includes(query)
+  );
+
+  matched.forEach(match => {
+    const item = document.createElement("a");
+    item.classList.add("list-group-item", "list-group-item-action");
+    item.href = "#";
+
+    // Highlight phần khớp
+    if (query) {
+      const regex = new RegExp(`(${query})`, "gi");
+      const highlighted = match.replace(regex, `<span class="highlight">$1</span>`);
+      item.innerHTML = highlighted;
+    } else {
+      item.textContent = match;
+    }
+
+    item.addEventListener("click", (e) => {
+      e.preventDefault();
+      searchInput.value = match;
+      suggestionsBox.innerHTML = "";
+      clearBtn.style.display = "block";
+    });
+
+    suggestionsBox.appendChild(item);
+  });
+}
+
+  // Khi người dùng gõ vào input
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim().toLowerCase();
+    showSuggestions(query);
+    clearBtn.style.display = query ? "block" : "none";
+  });
+
+  // Khi input được focus → hiển thị tất cả gợi ý
+  searchInput.addEventListener("focus", () => {
+    showSuggestions(searchInput.value.trim().toLowerCase());
+  });
+
+  // Click nút xoá
+  clearBtn.addEventListener("click", () => {
+    searchInput.value = "";
+    clearBtn.style.display = "none";
+    suggestionsBox.innerHTML = "";
+    searchInput.focus();
+  });
+
+  // Click ra ngoài → ẩn gợi ý
+  document.addEventListener("click", (e) => {
+    if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+      suggestionsBox.innerHTML = "";
+    }
+  });
+});

@@ -176,3 +176,29 @@ form[role="search"] input:focus {
 #advanced-search {
   transition: all 0.3s ease;
 }
+
+/*goi y tim kiem*/
+#suggestions {
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 0.5rem 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+/* Ẩn nút x (clear) mặc định của trình duyệt trong input[type="search"] */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+.highlight {
+  color: red;
+  font-weight: bold;
+}
