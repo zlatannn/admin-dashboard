@@ -33,9 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Xoá nội dung cũ (đăng nhập, đăng ký)
     authContainer.innerHTML = `
       <div class="dropdown">
-        <a class="btn btn-success dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" id="auth-button">
+        <button class="btn btn-success dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" id="auth-button">
           Xin chào, ${loggedUser}
-        </a>
+        </button>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="../profile/profile.html">Thông tin cá nhân</a></li>
           <li><a class="dropdown-item" href="#" id="logout-btn">Đăng xuất</a></li>
@@ -185,4 +185,33 @@ document.addEventListener("DOMContentLoaded", () => {
       suggestionsBox.innerHTML = "";
     }
   });
+});
+
+//toggle search in home//
+document.getElementById("nav-home").addEventListener("click", function (e) {
+  e.preventDefault();
+  const section = document.getElementById("home-section");
+  if (section.style.display === "none" || !section.style.display) {
+    section.style.display = "block";
+  } else {
+    section.style.display = "none";
+  }
+});
+
+//strip//
+const newsItems = document.querySelector('.news-items');
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
+let scrollPos = 0;
+const itemWidth = 160; // Độ rộng trung bình mỗi mục tin + khoảng cách
+
+prevBtn.addEventListener('click', () => {
+  scrollPos = Math.max(scrollPos - itemWidth, 0);
+  newsItems.style.transform = `translateX(-${scrollPos}px)`;
+});
+
+nextBtn.addEventListener('click', () => {
+  const maxScroll = newsItems.scrollWidth - document.querySelector('.news-items-wrapper').clientWidth;
+  scrollPos = Math.min(scrollPos + itemWidth, maxScroll);
+  newsItems.style.transform = `translateX(-${scrollPos}px)`;
 });
