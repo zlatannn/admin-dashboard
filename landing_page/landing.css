@@ -194,15 +194,43 @@ button.btn {
 ============================ */
 .news-strip {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(to right, #f8f9fa, #ffffff);
-  border-top: 1px solid #dee2e6;
-  border-bottom: 1px solid #dee2e6;
-  padding: 0.5rem;
+  justify-content: center; /* căn giữa ngang */
+  align-items: center;     /* căn giữa dọc */
+  background: linear-gradient(to right, #e0f0ff, #ffffff);
+  padding: 8px 16px;
+  overflow: hidden;
   position: relative;
-  overflow: visible;
-  z-index: 1000;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* Nội dung tin tức chia thành các mục */
+.news-strip .news-item {
+  padding: 6px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 4px;
+}
+
+/* Hover nhẹ nhàng */
+.news-strip .news-item:hover {
+  background-color: rgba(13, 110, 253, 0.1);
+  color: #0d6efd;
+}
+
+/* Nút điều hướng trái/phải nếu có */
+.news-strip .nav-arrow {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  padding: 0 10px;
+  cursor: pointer;
+  color: #0d6efd;
+  transition: color 0.3s ease;
+}
+
+.news-strip .nav-arrow:hover {
+  color: #084298;
 }
 
 .news-items-wrapper {
